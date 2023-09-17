@@ -1,0 +1,33 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="box">
+    <article class="media">
+        <div class="media-left">
+            <figure class="image is-50x50">
+                <img src="{{weather.icon}}" alt="Image">
+            </figure>
+        </div>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <span class="title">{{ weather.city }}</span>
+                    <br>
+                    <span class="subtitle">{{ weather.temperature }}° F</span>
+
+                    <br> 
+                    <ul>
+                        {% for desc in weather.weather_descriptions %}
+                        <li>{{ desc }}</li>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    </article>
+</div>
+
+{% endblock %}
