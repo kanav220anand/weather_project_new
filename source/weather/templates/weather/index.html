@@ -7,23 +7,28 @@
 
 <div class="box">
     <article class="media">
-        <div class="media-left">
-            <figure class="image is-50x50">
-                <img src="{{weather.icon}}" alt="Image">
-            </figure>
-        </div>
+        
         <div class="media-content">
             <div class="content">
                 <p>
-                    <span class="title">{{ weather.city }}</span>
-                    <br>
-                    <span class="subtitle">{{ weather.temperature }}° F</span>
+                    {% if weather.city %}
+                        <span class="title">City you searched for is <b>{{ weather.city }}</b></span>
+                    
+                        <br></br>
 
-                    <br> 
-                    <ul>
-                        {% for desc in weather.weather_descriptions %}
-                        <li>{{ desc }}</li>
-                    {% endfor %}
+                        <span class="subtitle">Temperature at the moment is  <b>{{ weather.temperature }}° F</b></span>
+
+                        <br> 
+                        
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="{{weather.icon}}" alt="Image">
+                                    <span class="image">Looks like it is <b>{{ weather.weather_description }}</b></span>
+                                </figure>
+                            </div>
+                    {% else %}
+                        <span class="title">Sorry, couldn't find the city that you were looking for</b></span>
+                    {% endif %}
                 </p>
             </div>
         </div>

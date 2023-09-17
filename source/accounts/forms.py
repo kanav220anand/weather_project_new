@@ -77,14 +77,6 @@ class EmailForm(UserCacheMixin, forms.Form):
         return email
 
 
-class SignInViaEmailForm(SignIn, EmailForm):
-    @property
-    def field_order(self):
-        if settings.USE_REMEMBER_ME:
-            return ['email', 'password', 'remember_me']
-        return ['email', 'password']
-
-
 class EmailOrUsernameForm(UserCacheMixin, forms.Form):
     email_or_username = forms.CharField(label=_('Email or Username'))
 

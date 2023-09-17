@@ -13,8 +13,10 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, View
 
-from .forms import (SignInViaEmailForm, SignInViaEmailOrUsernameForm,
+from .forms import (SignInViaEmailOrUsernameForm,
                     SignInViaUsernameForm, SignUpForm)
+
+from django.views.generic import TemplateView
 
 
 class GuestOnlyView(View):
@@ -31,13 +33,7 @@ class LogInView(GuestOnlyView, FormView):
 
     @staticmethod
     def get_form_class(**kwargs):
-        # if settings.DISABLE_USERNAME or settings.LOGIN_VIA_EMAIL:
-        #     return SignInViaEmailForm
-
-        # if settings.LOGIN_VIA_EMAIL_OR_USERNAME:
         return SignInViaEmailOrUsernameForm
-
-        return SignInViaUsernameForm
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)
@@ -102,5 +98,5 @@ class SignUpView(GuestOnlyView, FormView):
         return redirect('index')
 
 
-class LogOutView(LoginRequiredMixin, BaseLogoutView):
-    template_name = 'accounts/log_out.html'
+class LogOutRenderView(TemplateView):
+    template_name = "accounts/log_out.html"
